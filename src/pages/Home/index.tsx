@@ -27,6 +27,7 @@ const HomePage: FC = () => {
   useEffect(() => {
     handleGetData();
   }, []);
+
   const handleGetData = async () => {
     setState((prevState) => ({ ...prevState, isLoading: true }));
     const res = await fetch("/api/v1/version");
