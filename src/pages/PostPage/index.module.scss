@@ -1,0 +1,60 @@
+@import "@assets/scss/common";
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+  &__content {
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+  &__bottom {
+    flex: 0 0 auto;
+    padding: 1.6rem;
+    display: flex;
+    gap: 1.6rem;
+  }
+}
+.box {
+  @include noneSelect;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: auto;
+  &__top {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-weight: bold;
+  }
+}
+.h1 {
+  color: #fff;
+}
+.btn {
+  width: 100%;
+  border-radius: 0;
+  background: orange;
+  border: none;
+}
+.list {
+  margin: 0;
+  padding: 1.6rem;
+  color: #fff;
+  &:hover {
+    background: rgba(0, 0, 0, 0.12);
+  }
+  li {
+    list-style: none;
+    display: flex;
+    u {
+      color: rgba(255, 255, 255, 0.41);
+      width: 6rem;
+      display: inline-flex;
+      flex: 0 0 auto;
+    }
+  }
+}

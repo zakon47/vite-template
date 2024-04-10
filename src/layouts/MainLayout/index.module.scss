@@ -1,0 +1,104 @@
+@import "@assets/scss/common";
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem;
+}
+.box {
+  @include noneSelect;
+  height: 40rem;
+  max-width: 100rem;
+  display: flex;
+  width: 100%;
+  background: #2f2f33;
+  color: #fff;
+  box-shadow: 0 0 1rem #484848;
+  border: 0.2rem solid rgba(255, 255, 255, 0.1);
+  border-radius: 2rem 7rem 7rem 2rem;
+  overflow: hidden;
+  @include Media-Desktop-Small {
+    max-height: 30rem;
+  }
+  &__left {
+    flex: 0 0 auto;
+    background: #1f1f28;
+    width: 25rem;
+  }
+  &__right {
+    flex: 1 1 auto;
+    position: relative;
+  }
+}
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  &__top {
+    height: 5rem;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    padding: 0 1.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  &__bottom {
+    overflow: auto;
+    height: 100%;
+  }
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  height: 100%;
+  justify-content: space-between;
+  &__logo {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #fff;
+    &:hover {
+      background: rgba(0, 0, 0, 0.13);
+    }
+  }
+  &__icons {
+    flex: 0 0 auto;
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+    justify-content: center;
+    background: #0f0f1a;
+    padding: 1rem;
+    a {
+      display: flex;
+    }
+  }
+  &__nav {
+    display: flex;
+    align-items: flex-start;
+    flex: 1 1 auto;
+  }
+  &__bottom {
+    flex: 0 0 auto;
+    background: orange;
+    height: 5rem;
+    color: #000;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

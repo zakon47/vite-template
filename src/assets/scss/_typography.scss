@@ -722,11 +722,3 @@
   @include letter-spacing(0.1rem);
   @include font-weight(700);
 }
-
-.wrap-filter {
-  filter: drop-shadow(0 0 0.7rem rgba(105, 3, 232, 0.3));
-}
-
-.wrap-border {
-  filter: drop-shadow(0 0 1px rgba(105, 3, 232, 0.8));
-}
