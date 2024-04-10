@@ -1,0 +1,40 @@
+$beakPoint-desktop-large-number: 1799;
+$beakPoint-desktop-number: 1399;
+$beakPoint-table-number: 1019;
+$beakPoint-mobile-number: 599;
+$beakPoint-desktop-large: #{$beakPoint-desktop-large-number}px;
+$beakPoint-desktop: #{$beakPoint-desktop-number}px;
+$beakPoint-table: #{$beakPoint-table-number}px;
+$beakPoint-mobile: #{$beakPoint-mobile-number}px;
+
+/** Desktop first approach */
+
+@mixin Media-Desktop-Large() {
+  @media (max-width: 9999px) {
+    @content;
+  }
+}
+
+@mixin Media-Desktop-Medium() {
+  @media (max-width: $beakPoint-desktop-large) {
+    @content;
+  }
+}
+
+@mixin Media-Desktop-Small() {
+  @media (max-width: $beakPoint-desktop) {
+    @content;
+  }
+}
+
+@mixin Media-Table() {
+  @media (max-width: $beakPoint-table) {
+    @content;
+  }
+}
+
+@mixin Media-Mobile() {
+  @media (max-width: $beakPoint-mobile) {
+    @content;
+  }
+}

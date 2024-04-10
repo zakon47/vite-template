@@ -1,0 +1,43 @@
+@import "@/assets/scss/common";
+
+.wrap {
+  @include noneSelect;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  background: #2f2f33;
+  color: #fff;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 7rem 0 7rem;
+  width: 20rem;
+  height: 19rem;
+  overflow: hidden;
+  box-shadow: 0 0 1rem #484848;
+  border: 0.2rem solid rgba(255, 255, 255, 0.85);
+}
+.h1 {
+  color: #fff;
+}
+.icons {
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+  justify-content: flex-end;
+  background: #1f1f28;
+  padding: 1rem 5.5rem 1rem 1rem;
+  border-radius: 0.6rem;
+  a {
+    display: flex;
+  }
+}
