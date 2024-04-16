@@ -9,10 +9,10 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --no-cache --color --max-warnings 0",
     "serve": "serve -p 3000 -s dist",
     "preview": "vite preview",
+    "stylelint:fix": "stylelint 'src/**/*.{scss,css}' --fix",
     "lint-staged": "lint-staged",
     "husky-install": "husky install",
-    "fix": "npx eslint --fix .",
-    "format": "npm run fix && prettier --write .",
+    "fix": "npx eslint --fix . && npm run stylelint:fix && prettier --write .",
     "check-conflict": "npx eslint-config-prettier ./src/main.jsx",
     "check": "npm run check-conflict && npm run lint"
   },
@@ -24,8 +24,7 @@
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "npm run check-conflict",
-      "npm run lint",
-      "npm run format",
+      "npm run fix",
       "git add"
     ]
   },
@@ -55,9 +54,16 @@
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
+    "postcss-preset-env": "^9.5.5",
     "prettier": "3.2.5",
     "sass": "^1.74.1",
     "serve": "^14.2.1",
+    "stylelint": "^14.16.1",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-order": "^6.0.4",
+    "stylelint-scss": "^4.2.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   }
