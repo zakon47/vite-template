@@ -1,6 +1,6 @@
 import s from "./index.module.scss";
 import { ROUTES } from "@/routes.tsx";
-import { ILink } from "@/components";
+import { ILink } from "@/components/ILink/ILink.tsx";
 
 export const NavBar = () => {
   return (
