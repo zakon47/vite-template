@@ -5,7 +5,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:import/errors',
     'plugin:import/warnings',
     'prettier',
   ],
@@ -21,24 +20,4 @@ module.exports = {
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
   },
-  settings: {
-    'import/resolver': {
-      alias: {
-        map: [
-          ['', './public'],
-          ['@', './src'],
-          ['@layouts', './src/layouts'],
-        ],
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
-      },
-    },
-  },
-  overrides: [
-    {
-      files: ['*.scss', '*.css'],
-      rules: {
-        'import/no-unresolved': 'off',
-      },
-    },
-  ],
 };

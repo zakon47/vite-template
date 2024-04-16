@@ -29,7 +29,7 @@
   &__left {
     flex: 0 0 auto;
     //background: #1f1f28;
-    background: url("/vite.svg");
+    background: url('/public/vite.svg');
     width: 25rem;
     @include Media-Table {
       width: 100%;
