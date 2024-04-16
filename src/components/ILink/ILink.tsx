@@ -1,8 +1,8 @@
-import clsx from "clsx";
-import { NavLink, LinkProps } from "react-router-dom";
-import { FC, PropsWithChildren } from "react";
+import clsx from 'clsx';
+import { FC, PropsWithChildren } from 'react';
+import { LinkProps, NavLink } from 'react-router-dom';
 
-interface ILinkProps extends Omit<LinkProps, "className"> {
+interface ILinkProps extends Omit<LinkProps, 'className'> {
   className?: string;
   classNameActive?: string;
 }

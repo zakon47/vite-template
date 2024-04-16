@@ -1,6 +1,7 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ROUTES } from "@/routes.tsx";
-import { MainLayout } from "@/layouts";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import { MainLayout } from '@/layouts';
+import { ROUTES } from '@/routes.tsx';
 
 const routes = createBrowserRouter([
   {

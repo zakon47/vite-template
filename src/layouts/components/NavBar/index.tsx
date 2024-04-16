@@ -1,10 +1,13 @@
-import s from "./index.module.scss";
-import { ROUTES } from "@/routes.tsx";
-import { ILink } from "@/components/ILink/ILink.tsx";
+import { Container } from '@/components/Container/index.tsx';
+import { ILink } from '@/components/ILink/ILink.tsx';
+import { ROUTES } from '@/routes.tsx';
+
+import s from './index.module.scss';
 
 export const NavBar = () => {
   return (
     <nav className={s.wrap}>
+      <Container />
       <ul className={s.wrap__ul}>
         <li>
           <ILink to={ROUTES.home.path} classNameActive={s.active}>

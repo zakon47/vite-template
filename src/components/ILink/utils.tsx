@@ -16,10 +16,10 @@ export function getActiveLink<T>(
     (a, b) => b.path.length - a.path.length,
   );
 
-  const currentPathSegments = currentPath.split("/").filter(Boolean);
+  const currentPathSegments = currentPath.split('/').filter(Boolean);
 
   for (const item of sortedMenuItems) {
-    const itemPathSegments = item.path.split("/").filter(Boolean);
+    const itemPathSegments = item.path.split('/').filter(Boolean);
 
     if (itemPathSegments.length !== currentPathSegments.length) {
       continue;

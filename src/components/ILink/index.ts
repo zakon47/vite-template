@@ -1,2 +1,2 @@
-export * from "./ILink";
-export * from "./utils";
+export * from './ILink';
+export * from './utils';

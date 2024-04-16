@@ -1,8 +1,10 @@
-import { FC, useCallback, useEffect, useState } from "react";
-import s from "./index.module.scss";
-import { useNavigate, useParams } from "react-router-dom";
-import clsx from "clsx";
-import { ROUTES } from "@/routes.tsx";
+import clsx from 'clsx';
+import { FC, useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { ROUTES } from '@/routes.tsx';
+
+import s from './index.module.scss';
 
 type PostResponse = {
   userId: number;
@@ -49,7 +51,7 @@ export const PostPage: FC = () => {
           <h2 className={s.h1}>Posts {count}</h2>
         </div>
         {state.isLoading ? (
-          <div style={{ padding: "1.6rem" }}>Loading...</div>
+          <div style={{ padding: '1.6rem' }}>Loading...</div>
         ) : (
           <>
             {state.data ? (

@@ -1,8 +1,10 @@
-import { FC, useEffect, useState } from "react";
-import s from "./index.module.scss";
-import { Link } from "react-router-dom";
-import clsx from "clsx";
-import { ROUTES } from "@/routes.tsx";
+import clsx from 'clsx';
+import { FC, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { ROUTES } from '@/routes.tsx';
+
+import s from './index.module.scss';
 
 type PostResponse = {
   userId: number;
@@ -45,12 +47,12 @@ export const PostsPage: FC = () => {
           <h2 className={s.h1}>Posts {count}</h2>
         </div>
         {state.isLoading ? (
-          <div style={{ padding: "1.6rem" }}>Loading...</div>
+          <div style={{ padding: '1.6rem' }}>Loading...</div>
         ) : (
           <>
             {state.data?.map((post) => (
               <Link
-                to={ROUTES.postDetail.path.replace(":id", String(post.id))}
+                to={ROUTES.postDetail.path.replace(':id', String(post.id))}
                 className={s.list}
                 key={post.id}
               >

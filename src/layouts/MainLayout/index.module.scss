@@ -1,4 +1,4 @@
-@import "@assets/scss/common";
+@import '@assets/scss/common';
 
 .wrap {
   display: flex;
@@ -28,7 +28,8 @@
   }
   &__left {
     flex: 0 0 auto;
-    background: #1f1f28;
+    //background: #1f1f28;
+    background: url("/vite.svg");
     width: 25rem;
     @include Media-Table {
       width: 100%;

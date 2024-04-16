@@ -1,5 +1,6 @@
-import { FC } from "react";
-import s from "./index.module.scss";
+import { FC } from 'react';
+
+import s from './index.module.scss';
 export const HomePage: FC = () => {
   return (
     <div className={s.wrap}>

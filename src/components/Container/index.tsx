@@ -1,7 +1,7 @@
-import clsx from "clsx";
-import { FC, PropsWithChildren } from "react";
+import clsx from 'clsx';
+import { FC, PropsWithChildren } from 'react';
 
-import s from "./index.module.scss";
+import s from './index.module.scss';
 
 interface ContainerProps {
   className?: string;

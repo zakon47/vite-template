@@ -1,12 +1,13 @@
-import clsx from "clsx";
-import { FC, PropsWithChildren } from "react";
+import { NavBar } from '@layouts/components/NavBar';
+import clsx from 'clsx';
+import { FC, PropsWithChildren } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 
-import s from "./index.module.scss";
-import { NavBar } from "@layouts/components/NavBar";
-import { Link, Outlet } from "react-router-dom";
-import reactLogo from "@/assets/react.svg";
-import viteLogo from "/vite.svg";
-import { ROUTES } from "@/routes.tsx";
+import viteLogo from '/vite.svg';
+import reactLogo from '@/assets/react.svg';
+import { ROUTES } from '@/routes.tsx';
+
+import s from './index.module.scss';
 
 interface MainLayoutProps {
   className?: string;
