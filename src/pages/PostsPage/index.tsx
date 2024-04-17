@@ -1,56 +1,43 @@
 import clsx from 'clsx';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
+import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
+import { Service } from '@/react-query';
 import { ROUTES } from '@/routes.tsx';
+import { setAppStore, Store } from '@/zustand';
 
 import s from './index.module.scss';
 
-type PostResponse = {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-};
-
-interface HomePageState {
-  isLoading: boolean;
-  data: null | PostResponse[];
-}
-
 export const PostsPage: FC = () => {
-  const [count, setCount] = useState(1);
+  const { testCountStore } = Store.app.use();
 
-  const [state, setState] = useState<HomePageState>({
-    isLoading: true,
-    data: null,
+  const {
+    data: posts,
+    isFetching,
+    refetch,
+  } = useQuery({
+    ...Service.posts.getAll({}),
   });
 
-  useEffect(() => {
-    handleGetData();
-  }, []);
-
-  const handleGetData = async () => {
-    setState((prevState) => ({ ...prevState, isLoading: true }));
-    try {
-      const res = await fetch(`/api${ROUTES.posts.path}`);
-      const data = (await res.json()) as unknown as PostResponse[];
-      setState((prevState) => ({ ...prevState, data, isLoading: false }));
-    } catch (e) {
-      setState((prevState) => ({ ...prevState, data: null, isLoading: false }));
-    }
-  };
   return (
     <div className={s.wrap}>
       <div className={clsx(s.box, s.wrap__content)}>
-        <div className={s.box__top} onClick={() => setCount(count + 1)}>
-          <h2 className={s.h1}>Posts {count}</h2>
+        <div
+          className={s.box__top}
+          onClick={() =>
+            setAppStore({
+              testCountStore: testCountStore + 1,
+            })
+          }
+        >
+          <h2 className={s.h1}>Posts {testCountStore}</h2>
         </div>
-        {state.isLoading ? (
+        {isFetching ? (
           <div style={{ padding: '1.6rem' }}>Loading...</div>
         ) : (
           <>
-            {state.data?.map((post) => (
+            {posts?.map((post) => (
               <Link
                 to={ROUTES.postDetail.path.replace(':id', String(post.id))}
                 className={s.list}
@@ -71,7 +58,7 @@ export const PostsPage: FC = () => {
         )}
       </div>
       <div className={s.wrap__bottom}>
-        <button onClick={handleGetData}>Get Data</button>
+        <button onClick={() => refetch()}>Get Data</button>
       </div>
     </div>
   );

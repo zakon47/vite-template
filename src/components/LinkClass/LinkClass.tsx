@@ -7,7 +7,7 @@ interface ILinkProps extends Omit<LinkProps, 'className'> {
   classNameActive?: string;
 }
 
-export const ILink: FC<PropsWithChildren<ILinkProps>> = ({
+export const LinkClass: FC<PropsWithChildren<ILinkProps>> = ({
   to,
   className,
   classNameActive,

@@ -5,6 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 import viteLogo from '/vite.svg';
 import reactLogo from '@/assets/react.svg';
+import { RouteItem } from '@/models/route-item.ts';
 import { ROUTES } from '@/routes.tsx';
 
 import s from './index.module.scss';
@@ -15,6 +16,22 @@ interface MainLayoutProps {
   classNameBody?: string;
   classNameFooter?: string;
 }
+
+const list: RouteItem[] = [
+  {
+    path: ROUTES.home.path,
+    name: ROUTES.home.title,
+  },
+  {
+    path: ROUTES.posts.path,
+    name: ROUTES.posts.title,
+  },
+  {
+    ...ROUTES.zustand,
+    name: ROUTES.zustand.title,
+    element: <div>zustand</div>,
+  },
+];
 
 export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
   className,
@@ -36,7 +53,7 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
               </a>
             </div>
             <div className={s.left__nav}>
-              <NavBar />
+              <NavBar items={list} />
             </div>
             <div className={s.left__bottom}>Template</div>
           </div>

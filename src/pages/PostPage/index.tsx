@@ -1,69 +1,69 @@
 import clsx from 'clsx';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useMemo } from 'react';
+import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { ROUTES } from '@/routes.tsx';
+import { Service } from '@/react-query';
+import { setAppStore, Store } from '@/zustand';
 
 import s from './index.module.scss';
 
-type PostResponse = {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-};
-
-interface HomePageState {
-  isLoading: boolean;
-  data: null | PostResponse;
-}
-
 export const PostPage: FC = () => {
+  const { testCountStore } = Store.app.use();
   const navigate = useNavigate();
+  const updatePost = useMutation(Service.posts.updatePost());
   const params = useParams<{ id?: string }>();
-  const [count, setCount] = useState(1);
+  const id = useMemo(() => Number(params?.id), [params?.id]);
 
-  const [state, setState] = useState<HomePageState>({
-    isLoading: true,
-    data: null,
+  const {
+    data: post,
+    isFetching,
+    refetch,
+  } = useQuery({
+    ...Service.posts.getById({
+      id,
+    }),
+    enabled: !isNaN(id),
   });
 
-  const handleGetData = useCallback(async () => {
-    if (!params.id) return;
-    setState((prevState) => ({ ...prevState, isLoading: true }));
-    try {
-      const res = await fetch(`/api${ROUTES.posts.path}/${params.id}`);
-      const data = (await res.json()) as unknown as PostResponse;
-      setState((prevState) => ({ ...prevState, data, isLoading: false }));
-    } catch (e) {
-      setState((prevState) => ({ ...prevState, data: null, isLoading: false }));
-    }
-  }, [params.id]);
-
-  useEffect(() => {
-    handleGetData();
-  }, [params.id, handleGetData]);
+  const handleUpdateData = async () => {
+    if (isNaN(id)) return;
+    await updatePost.mutateAsync({
+      id,
+      data: {
+        ...post,
+        title: 'UPDATED',
+      },
+    });
+  };
 
   return (
     <div className={s.wrap}>
       <div className={clsx(s.box, s.wrap__content)}>
-        <div className={s.box__top} onClick={() => setCount(count + 1)}>
-          <h2 className={s.h1}>Posts {count}</h2>
+        <div
+          className={s.box__top}
+          onClick={() =>
+            setAppStore({
+              testCountStore: testCountStore + 1,
+            })
+          }
+        >
+          <h2 className={s.h1}>Posts {testCountStore}</h2>
         </div>
-        {state.isLoading ? (
+        {isFetching ? (
           <div style={{ padding: '1.6rem' }}>Loading...</div>
         ) : (
           <>
-            {state.data ? (
+            {post ? (
               <ul className={s.list}>
                 <li>
-                  <u>ID:</u> {state.data.id}
+                  <u>ID:</u> {post.id}
                 </li>
                 <li>
-                  <u>Title:</u> {state.data.title}
+                  <u>Title:</u> {post.title}
                 </li>
                 <li>
-                  <u>Body:</u> {state.data.body}
+                  <u>Body:</u> {post.body}
                 </li>
               </ul>
             ) : (
@@ -74,7 +74,8 @@ export const PostPage: FC = () => {
       </div>
       <div className={s.wrap__bottom}>
         <button onClick={() => navigate(-1)}>Back</button>
-        <button onClick={handleGetData}>Get Data</button>
+        <button onClick={() => refetch()}>Get Data</button>
+        <button onClick={() => handleUpdateData()}>Update Data</button>
       </div>
     </div>
   );

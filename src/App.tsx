@@ -20,6 +20,10 @@ const routes = createBrowserRouter([
         path: ROUTES.postDetail.path,
         element: ROUTES.postDetail.element,
       },
+      {
+        path: ROUTES.zustand.path,
+        element: ROUTES.zustand.element,
+      },
     ],
   },
   {

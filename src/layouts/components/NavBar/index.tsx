@@ -1,25 +1,22 @@
-import { Container } from '@/components/Container/index.tsx';
-import { ILink } from '@/components/ILink/ILink.tsx';
-import { ROUTES } from '@/routes.tsx';
+import { FC } from 'react';
+
+import { LinkClass } from '@/components';
+import { RouteItem } from '@/models/route-item.ts';
 
 import s from './index.module.scss';
 
-export const NavBar = () => {
+interface NavBarProps {
+  items: RouteItem[];
+}
+
+export const NavBar: FC<NavBarProps> = ({ items }) => {
   return (
     <nav className={s.wrap}>
-      <Container />
-      <ul className={s.wrap__ul}>
-        <li>
-          <ILink to={ROUTES.home.path} classNameActive={s.active}>
-            Home
-          </ILink>
-        </li>
-        <li>
-          <ILink to={ROUTES.posts.path} classNameActive={s.active}>
-            Posts
-          </ILink>
-        </li>
-      </ul>
+      {items.map((elem) => (
+        <LinkClass key={elem.path} to={elem.path} classNameActive={s.active}>
+          {elem.element ? elem.element : elem.name}
+        </LinkClass>
+      ))}
     </nav>
   );
 };

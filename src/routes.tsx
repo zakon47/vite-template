@@ -1,20 +1,27 @@
+import { ZustandPage } from '@pages/ZustandPage';
+
 import { ErrorPage, HomePage, PostPage, PostsPage } from '@/pages';
 
 export const ROUTES = {
   home: {
     path: '/',
-    title: 'Index',
+    title: 'Home',
     element: <HomePage />,
   },
   posts: {
     path: '/posts',
-    title: 'List posts',
+    title: 'Posts',
     element: <PostsPage />,
   },
   postDetail: {
     path: '/posts/:id',
     title: '',
     element: <PostPage />,
+  },
+  zustand: {
+    path: '/zustand',
+    title: 'Zustand',
+    element: <ZustandPage />,
   },
   error: {
     path: '*',
