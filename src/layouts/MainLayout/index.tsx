@@ -1,12 +1,14 @@
 import { NavBar } from '@layouts/components/NavBar';
 import clsx from 'clsx';
 import { FC, PropsWithChildren } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, Outlet } from 'react-router-dom';
 
 import viteLogo from '/vite.svg';
 import reactLogo from '@/assets/react.svg';
 import { RouteItem } from '@/models/route-item.ts';
 import { ROUTES } from '@/routes.tsx';
+import { LanguageSwitcher } from '@/widgets';
 
 import s from './index.module.scss';
 
@@ -20,15 +22,15 @@ interface MainLayoutProps {
 const list: RouteItem[] = [
   {
     path: ROUTES.home.path,
-    name: ROUTES.home.title,
+    name: ROUTES.home.titleLang || ROUTES.home.title,
   },
   {
     path: ROUTES.posts.path,
-    name: ROUTES.posts.title,
+    name: ROUTES.posts.titleLang || ROUTES.posts.title,
   },
   {
     ...ROUTES.zustand,
-    name: ROUTES.zustand.title,
+    name: ROUTES.zustand.titleLang || ROUTES.zustand.title,
     element: <div>zustand</div>,
   },
 ];
@@ -36,6 +38,7 @@ const list: RouteItem[] = [
 export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
   className,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className={clsx(s.wrap, className)}>
       <div className={s.box}>
@@ -55,12 +58,15 @@ export const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
             <div className={s.left__nav}>
               <NavBar items={list} />
             </div>
-            <div className={s.left__bottom}>Template</div>
+            <div className={s.left__bottom}>{t('version')}</div>
           </div>
         </div>
         <div className={clsx(s.box__right)}>
           <div className={s.content}>
-            <div className={s.content__top}>Panel</div>
+            <div className={s.content__top}>
+              Lang:
+              <LanguageSwitcher className={s.content__top_lang} />
+            </div>
             <div className={s.content__bottom}>
               <Outlet />
             </div>

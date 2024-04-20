@@ -76,6 +76,11 @@
     height: 5rem;
     padding: 0 1.6rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    gap: 2rem;
+    &_lang{
+      display: flex;
+      gap: 1rem;
+    }
   }
 
   &__bottom {

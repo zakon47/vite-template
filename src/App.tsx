@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { MainLayout } from '@/layouts';
 import { ROUTES } from '@/routes.tsx';
+import { Store } from '@/zustand';
+
+import { i18n } from './i18n';
 
 const routes = createBrowserRouter([
   {
@@ -33,6 +37,34 @@ const routes = createBrowserRouter([
 ]);
 
 function App() {
+  const { loadingFly, initApp } = Store.app.use();
+
+  useEffect(() => {
+    Store.app.set({
+      loadingFly: !i18n.isInitialized,
+    });
+
+    const handleLanguageChanged = () => {
+      Store.app.set({
+        loadingFly: false,
+      });
+    };
+
+    i18n.on('languageChanged', handleLanguageChanged);
+
+    return () => {
+      i18n.off('languageChanged', handleLanguageChanged);
+    };
+  }, []);
+
+  useEffect(() => {}, []);
+
+  if (!initApp) {
+    return <div>Loading APP...</div>;
+  }
+  if (loadingFly) {
+    return <div>Loading language...</div>;
+  }
   return <RouterProvider router={routes} />;
 }
 

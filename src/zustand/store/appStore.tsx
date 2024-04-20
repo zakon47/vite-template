@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 type AppStore = {
+  initApp?: boolean;
+  loadingFly?: boolean;
   testCount: number;
   testCountStore: number;
 };

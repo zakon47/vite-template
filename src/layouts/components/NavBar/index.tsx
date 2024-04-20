@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { LinkClass } from '@/components';
+import { useTranslatedArray } from '@/i18n';
 import { RouteItem } from '@/models/route-item.ts';
 
 import s from './index.module.scss';
@@ -10,9 +11,11 @@ interface NavBarProps {
 }
 
 export const NavBar: FC<NavBarProps> = ({ items }) => {
+  const menuList = useTranslatedArray(items, 'name');
+
   return (
     <nav className={s.wrap}>
-      {items.map((elem) => (
+      {menuList.map((elem) => (
         <LinkClass key={elem.path} to={elem.path} classNameActive={s.active}>
           {elem.element ? elem.element : elem.name}
         </LinkClass>
