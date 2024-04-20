@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { FC, useMemo } from 'react';
+import { Helmet } from 'react-helmet';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -38,45 +39,50 @@ export const PostPage: FC = () => {
   };
 
   return (
-    <div className={s.wrap}>
-      <div className={clsx(s.box, s.wrap__content)}>
-        <div
-          className={s.box__top}
-          onClick={() =>
-            setAppStore({
-              testCountStore: testCountStore + 1,
-            })
-          }
-        >
-          <h2 className={s.h1}>Posts {testCountStore}</h2>
+    <>
+      <Helmet>
+        <title>{post?.title}</title>
+      </Helmet>
+      <div className={s.wrap}>
+        <div className={clsx(s.box, s.wrap__content)}>
+          <div
+            className={s.box__top}
+            onClick={() =>
+              setAppStore({
+                testCountStore: testCountStore + 1,
+              })
+            }
+          >
+            <h2 className={s.h1}>Posts {testCountStore}</h2>
+          </div>
+          {isFetching ? (
+            <div style={{ padding: '1.6rem' }}>Loading...</div>
+          ) : (
+            <>
+              {post ? (
+                <ul className={s.list}>
+                  <li>
+                    <u>ID:</u> {post.id}
+                  </li>
+                  <li>
+                    <u>Title:</u> {post.title}
+                  </li>
+                  <li>
+                    <u>Body:</u> {post.body}
+                  </li>
+                </ul>
+              ) : (
+                <div>NONE</div>
+              )}
+            </>
+          )}
         </div>
-        {isFetching ? (
-          <div style={{ padding: '1.6rem' }}>Loading...</div>
-        ) : (
-          <>
-            {post ? (
-              <ul className={s.list}>
-                <li>
-                  <u>ID:</u> {post.id}
-                </li>
-                <li>
-                  <u>Title:</u> {post.title}
-                </li>
-                <li>
-                  <u>Body:</u> {post.body}
-                </li>
-              </ul>
-            ) : (
-              <div>NONE</div>
-            )}
-          </>
-        )}
+        <div className={s.wrap__bottom}>
+          <button onClick={() => navigate(-1)}>Back</button>
+          <button onClick={() => refetch()}>Get Data</button>
+          <button onClick={() => handleUpdateData()}>Update Data</button>
+        </div>
       </div>
-      <div className={s.wrap__bottom}>
-        <button onClick={() => navigate(-1)}>Back</button>
-        <button onClick={() => refetch()}>Get Data</button>
-        <button onClick={() => handleUpdateData()}>Update Data</button>
-      </div>
-    </div>
+    </>
   );
 };
