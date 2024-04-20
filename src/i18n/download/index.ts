@@ -1,27 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import axios, { AxiosError } from 'axios';
-// import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 
 // @ts-ignore
-import { ns } from '../vars.js';
+import { languagesList, ns } from '../vars.js';
 
-// dotenv.config();
-
-type Settings = {
-  i18n: {
-    languages: string[];
-  };
-  ns: string[];
-};
-
-const settings: Settings = {
-  // Пример настройки, вставьте ваш реальный конфиг
-  i18n: {
-    languages: ['en', 'ru'],
-  },
-  ns,
-};
+dotenv.config();
 
 async function downloadLang(
   apiKey: string,
@@ -59,15 +46,17 @@ async function downloadLang(
   }
 }
 
+const languages = languagesList.map((elem) => elem.id);
+
 async function downloadAll(apiKey: string): Promise<void> {
-  for (const lang of settings.i18n.languages) {
-    for (const nsName of settings.ns) {
+  for (const lang of languages) {
+    for (const nsName of ns) {
       await downloadLang(apiKey, nsName, lang);
     }
   }
 }
 (async () => {
-  // const apiKey = process.env.I18NEXUS_API_KEY
-  // if(!apiKey) throw new Error("I18NEXUS_API_KEY is not found")
-  // await downloadAll(apiKey);
+  const apiKey = process.env.VITE_I18NEXUS_API_KEY;
+  if (!apiKey) throw new Error('I18NEXUS_API_KEY is not found');
+  await downloadAll(apiKey);
 })();

@@ -3,10 +3,13 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpBackend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 
+import { ENV } from '@/env.ts';
 import { defaultLang, languagesList, ns } from '@/i18n/vars.ts';
 
-const apiKey = 'fdpAs7W2a4A-hc4-FcbJZQ';
-const loadPath = `https://api.i18nexus.com/project_resources/translations/{{lng}}/{{ns}}.json?api_key=${apiKey}`;
+if (!ENV.I18NEXUS_API_KEY) {
+  throw new Error('VITE_I18NEXUS_API_KEY is empty!');
+}
+const loadPath = `https://api.i18nexus.com/project_resources/translations/{{lng}}/{{ns}}.json?api_key=${ENV.I18NEXUS_API_KEY}`;
 
 const config: InitOptions = {
   fallbackLng: defaultLang,
@@ -15,8 +18,7 @@ const config: InitOptions = {
   supportedLngs: languagesList.map((elem) => elem.id),
 };
 
-const isProd = false;
-if (isProd) {
+if (ENV.I18NEXUS_IF_FILES) {
   config.backend = {
     loadPath: '/locales/{{lng}}/{{ns}}.json',
   };

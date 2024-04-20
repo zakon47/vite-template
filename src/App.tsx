@@ -57,7 +57,9 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setTimeout(() => Store.app.set({ initApp: true }), 1000);
+  }, []);
 
   if (!initApp) {
     return <div>Loading APP...</div>;

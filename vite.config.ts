@@ -13,10 +13,33 @@ export default defineConfig(({ mode }) => {
   const PORT = `${env.VITE_PORT ?? '5173'}`;
 
   return {
-    plugins: [react()],
+    plugins: [
+      react(),
+      {
+        // plugin for ignore-i18n-download
+        name: 'ignore-i18n-download',
+        resolveId(source) {
+          if (source.includes('src/i18n/download')) {
+            return source;
+          }
+          return null;
+        },
+        load(id) {
+          if (id.includes('src/i18n/download')) {
+            return 'export default {}';
+          }
+          return null;
+        },
+      },
+    ],
     css: {
       modules: {
         generateScopedName: isDev ? '[path]__[local]' : '[hash:base64:5]',
+      },
+    },
+    build: {
+      rollupOptions: {
+        external: ['src/i18n/download'],
       },
     },
     resolve: {
