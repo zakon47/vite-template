@@ -1,36 +1,12 @@
 import axios, { AxiosError } from 'axios';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 
-export type Language = {
-  id: string;
-  label: string;
-  code: string;
+// @ts-ignore
+import { ns } from '../vars.js';
 
-  dir?: 'ltr' | 'rtl';
-};
-
-export const defaultLang = 'en';
-export const ns = ['default', 'pages'];
-export const languagesObject: Record<string, Language> = {
-  en: {
-    id: 'en',
-    label: 'English',
-    code: 'gb',
-  },
-  ru: {
-    id: 'ru',
-    label: 'Русский',
-    code: 'ru',
-  },
-};
-export const languagesList: Language[] = [
-  languagesObject?.['en'],
-  languagesObject?.['ru'],
-];
-
-dotenv.config();
+// dotenv.config();
 
 type Settings = {
   i18n: {
@@ -60,8 +36,6 @@ async function downloadLang(
     });
 
     const dir = path.resolve('./public/locales/', language);
-
-    console.log(url, dir);
 
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
@@ -93,5 +67,7 @@ async function downloadAll(apiKey: string): Promise<void> {
   }
 }
 (async () => {
-  await downloadAll(process.env.I18NEXUS_API_KEY || '');
+  // const apiKey = process.env.I18NEXUS_API_KEY
+  // if(!apiKey) throw new Error("I18NEXUS_API_KEY is not found")
+  // await downloadAll(apiKey);
 })();

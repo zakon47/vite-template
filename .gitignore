@@ -24,5 +24,6 @@ dist-ssr
 *.sln
 *.sw?K
 
+src/i18n/**/*.js
 *storybook.log
 *storybook-static

@@ -19,7 +19,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "i18n:compile": "tsc -p src/i18n/download/tsconfig.json",
-    "i18n:run": "node src/i18n/download/index.js",
+    "i18n:run": "node src/i18n/download",
     "i18n:download": "npm run i18n:compile && npm run i18n:run"
   },
   "husky": {
