@@ -1,8 +1,9 @@
 import { ZustandPage } from '@pages/ZustandPage';
 
+import { i18n } from '@/i18n';
 import { ErrorPage, HomePage, PostPage, PostsPage } from '@/pages';
 
-type Route = {
+export type Route = {
   path: string;
   element: JSX.Element;
   title: string;
@@ -19,7 +20,7 @@ export const ROUTES = {
   posts: {
     path: '/posts',
     title: 'Posts',
-    titleLang: 'pages:posts',
+    titleLang: 'pages:posts_one',
     element: <PostsPage />,
   } as Route,
   postDetail: {
@@ -40,4 +41,6 @@ export const ROUTES = {
   } as Route,
 };
 
-// ROUTES.posts.
+export const getTitleFromRoute = (route: Route) => {
+  return i18n.t(route.titleLang || route.title);
+};

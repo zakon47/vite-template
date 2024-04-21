@@ -1,18 +1,16 @@
 import clsx from 'clsx';
 import { FC } from 'react';
 import { Helmet } from 'react-helmet';
-import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
 import { Service } from '@/react-query';
-import { ROUTES } from '@/routes.tsx';
+import { getTitleFromRoute, ROUTES } from '@/routes.tsx';
 import { setAppStore, Store } from '@/zustand';
 
 import s from './index.module.scss';
 
 export const PostsPage: FC = () => {
-  const { t } = useTranslation();
   const { testCountStore } = Store.app.use();
 
   const {
@@ -26,7 +24,7 @@ export const PostsPage: FC = () => {
   return (
     <>
       <Helmet>
-        <title>{t(ROUTES.posts.titleLang || ROUTES.posts.title)}</title>
+        <title>{getTitleFromRoute(ROUTES.posts)}</title>
       </Helmet>
       <div className={s.wrap}>
         <div className={clsx(s.box, s.wrap__content)}>
